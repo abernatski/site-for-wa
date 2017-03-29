@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>page01</title>
+    <script src="jquery-1.9.0.min.js"></script>
+</head>
+<body>
+
+
+<h1><b>page01</b></h1>
+
+<br>
+<a href="page01.html" wa-event="menu_social_tools">page01</a>
+<br>
+<a href="page02.html" wa-event="menu_admin">page02</a>
+<br>
+<a href="page03.html" wa-event="menu_po.st_home">page03</a>
+<br>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+
+        var isNotEmpty = function (v){
+            return typeof v  !== "undefined" && v;
+        };
+
+        $.each($("[wa-event]"), function(i, v){
+            var waTrackElem = $(v);
+            var waEvent = waTrackElem.attr('wa-event');
+
+            if(isNotEmpty(waEvent)) {
+                var waAttr = waTrackElem.attr('wa-data');
+                if (isNotEmpty(waAttr)) {
+                    waTrackElem.on('click', function(e) {
+                        var waData = $.parseJSON(waAttr);
+                        r1wa('trackEvent', waEvent, waData);
+                    });
+                } else {
+                    waTrackElem.on('click', function(e) {
+                        r1wa('trackEvent', waEvent);
+                    });
+                }
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>

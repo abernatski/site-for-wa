@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>page02</title>
+    <script src="jquery-1.9.0.min.js"></script>
+</head>
+<body>
+
+<h1>page02</h1>
+
+<br>
+<a href="page01.html" wa-event="menu_social_tools">page01</a>
+<br>
+<a href="page02.html" wa-event="menu_admin">page02</a>
+<br>
+<a href="page03.html" wa-event="menu_po.st_home">page03</a>
+<br>
+
+<script>(function(i,s,o,g,r,as,k,a,m){i['r1AnalyticsGlobalObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].ts=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=as;a.src=(g + '#applicationId=' + k);m.parentNode.insertBefore(a,m)})(window, document, 'script', '//analytics.po.st/static/v1/wa.js', 'r1wa', true, '7717449B-1E44-45D1-82D4-4E29DCB57A71');</script>
+
+
+<script type="text/javascript">
+
+</script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+
+        var isNotEmpty = function (v){
+            return typeof v  !== "undefined" && v;
+        };
+
+        $.each($("[wa-event]"), function(i, v){
+            var waTrackElem = $(v);
+            var waEvent = waTrackElem.attr('wa-event');
+
+            if(isNotEmpty(waEvent)) {
+                var waAttr = waTrackElem.attr('wa-data');
+                if (isNotEmpty(waAttr)) {
+                    waTrackElem.on('click', function(e) {
+                        var waData = $.parseJSON(waAttr);
+                        r1wa('trackEvent', waEvent, waData);
+                    });
+                } else {
+                    waTrackElem.on('click', function(e) {
+                        r1wa('trackEvent', waEvent);
+                    });
+                }
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>
